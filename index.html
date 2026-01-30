@@ -24,6 +24,184 @@
             box-sizing: border-box;
         }
 
+        /* Splash Screen */
+        .splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-dark);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .splash-screen.fade-out {
+            opacity: 0;
+            transform: scale(1.1);
+            pointer-events: none;
+        }
+
+        .splash-content {
+            text-align: center;
+            animation: floatIn 1s ease-out;
+        }
+
+        .splash-logo {
+            font-family: 'Syne', sans-serif;
+            font-size: 4rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent), #c084fc, var(--accent));
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 2rem;
+            animation: gradientShift 3s ease infinite;
+            letter-spacing: 2px;
+        }
+
+        .splash-subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+            animation: fadeIn 1s ease-out 0.5s backwards;
+        }
+
+        .enter-button {
+            background: transparent;
+            border: 2px solid var(--accent);
+            color: var(--accent);
+            padding: 1rem 3rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            font-family: 'Syne', sans-serif;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: pulse-border 2s ease-in-out infinite;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .enter-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: var(--accent);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+            z-index: -1;
+        }
+
+        .enter-button:hover {
+            color: var(--bg-dark);
+            border-color: var(--accent);
+            box-shadow: 0 0 30px rgba(168, 85, 247, 0.5);
+            transform: scale(1.05);
+        }
+
+        .enter-button:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .splash-particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 50%;
+            opacity: 0;
+            animation: particleFloat 3s ease-in-out infinite;
+        }
+
+        .particle:nth-child(1) { left: 10%; animation-delay: 0s; }
+        .particle:nth-child(2) { left: 20%; animation-delay: 0.5s; }
+        .particle:nth-child(3) { left: 30%; animation-delay: 1s; }
+        .particle:nth-child(4) { left: 40%; animation-delay: 1.5s; }
+        .particle:nth-child(5) { left: 50%; animation-delay: 0.3s; }
+        .particle:nth-child(6) { left: 60%; animation-delay: 0.8s; }
+        .particle:nth-child(7) { left: 70%; animation-delay: 1.2s; }
+        .particle:nth-child(8) { left: 80%; animation-delay: 0.6s; }
+        .particle:nth-child(9) { left: 90%; animation-delay: 1.8s; }
+
+        @keyframes particleFloat {
+            0% {
+                transform: translateY(100vh) scale(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) scale(1);
+                opacity: 0;
+            }
+        }
+
+        @keyframes floatIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes gradientShift {
+            0%, 100% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        @keyframes pulse-border {
+            0%, 100% {
+                box-shadow: 0 0 20px rgba(168, 85, 247, 0.3);
+            }
+            50% {
+                box-shadow: 0 0 40px rgba(168, 85, 247, 0.6);
+            }
+        }
+
+        /* Main Content - Hidden Initially */
+        .main-content {
+            opacity: 0;
+            transform: scale(0.95);
+            transition: opacity 0.8s ease 0.3s, transform 0.8s ease 0.3s;
+        }
+
+        .main-content.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
         body {
             font-family: 'DM Sans', sans-serif;
             background: var(--bg-dark);
@@ -477,6 +655,28 @@
     </style>
 </head>
 <body>
+    <!-- Splash Screen -->
+    <div class="splash-screen" id="splashScreen">
+        <div class="splash-particles">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+        </div>
+        <div class="splash-content">
+            <h1 class="splash-logo">damncatto</h1>
+            <p class="splash-subtitle">Developer & Creator</p>
+            <button class="enter-button" id="enterButton">Click to Enter</button>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent">
     <div class="container">
         <div class="header">
             <h1 class="name">damncatto</h1>
@@ -586,6 +786,8 @@
             © 2026 damncatto
         </div>
     </div>
+    </div>
+    <!-- End Main Content -->
 
     <!-- Music Player -->
     <button class="music-toggle" id="musicToggle" aria-label="Toggle Music">
@@ -596,29 +798,39 @@
             <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/>
         </svg>
     </button>
-    <audio id="bgMusic" loop>
+    <audio id="bgMusic" loop autoplay>
         <source src="https://github.com/kyro-scripts/bio/raw/main/fakemink%20-%20Hotel%20(Prod%20Rok%20%26%20CXO).mp3" type="audio/mpeg">
     </audio>
 
     <script>
+        // Splash Screen Enter
+        const splashScreen = document.getElementById('splashScreen');
+        const mainContent = document.getElementById('mainContent');
+        const enterButton = document.getElementById('enterButton');
+        const bgMusic = document.getElementById('bgMusic');
+
+        enterButton.addEventListener('click', () => {
+            // Fade out splash screen
+            splashScreen.classList.add('fade-out');
+            
+            // Start music
+            bgMusic.volume = 0.3;
+            bgMusic.play();
+            
+            // Show main content after animation
+            setTimeout(() => {
+                splashScreen.style.display = 'none';
+                mainContent.classList.add('visible');
+            }, 800);
+        });
+
         // Music Player
         const musicToggle = document.getElementById('musicToggle');
-        const bgMusic = document.getElementById('bgMusic');
         const playIcon = document.getElementById('playIcon');
         const pauseIcon = document.getElementById('pauseIcon');
         let isPlaying = true;
 
-        // Auto-start music
-        bgMusic.volume = 0.3; // Set volume to 30%
-        bgMusic.play().catch(() => {
-            // Browsers often block autoplay, so if it fails, show play button
-            isPlaying = false;
-            playIcon.style.display = 'block';
-            pauseIcon.style.display = 'none';
-            musicToggle.classList.remove('playing');
-        });
-        
-        // Start with pause icon showing and playing animation
+        // Start with pause icon showing since music starts on enter
         playIcon.style.display = 'none';
         pauseIcon.style.display = 'block';
         musicToggle.classList.add('playing');
