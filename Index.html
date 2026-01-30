@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>damncatto - Links</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0a0a;
+            --bg-card: #141414;
+            --accent: #a855f7;
+            --accent-dim: #9333ea;
+            --text-primary: #ffffff;
+            --text-secondary: #888888;
+            --border: #222222;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        .profile-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            animation: slideUp 0.6s ease-out 0.1s backwards;
+        }
+
+        .profile-avatar-wrapper {
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 3px solid var(--accent);
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.3);
+        }
+
+        .status-indicator {
+            position: absolute;
+            bottom: 2px;
+            right: 2px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 3px solid var(--bg-card);
+            background: #23a559;
+        }
+
+        .status-indicator.idle {
+            background: #f0b232;
+        }
+
+        .status-indicator.dnd {
+            background: #f23f43;
+        }
+
+        .status-indicator.offline {
+            background: #80848e;
+        }
+
+        .profile-info {
+            flex: 1;
+            text-align: left;
+        }
+
+        .profile-name {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+
+        .profile-activity {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .profile-status-text {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            font-style: italic;
+        }
+
+        /* About Me Card */
+        .about-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            animation: slideUp 0.6s ease-out 0.15s backwards;
+        }
+
+        .about-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: var(--accent);
+        }
+
+        .about-text {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .avatar {
+            width: 90px;
+            height: 90px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-dim));
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Syne', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--bg-dark);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .name {
+            font-family: 'Syne', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .bio {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Kyro Featured Widget */
+        .featured-widget {
+            background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
+            border: 2px solid var(--accent);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+            animation: slideUp 0.6s ease-out 0.2s backwards;
+        }
+
+        .featured-widget::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        .featured-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .featured-badge {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--bg-dark);
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            margin-bottom: 1rem;
+        }
+
+        .featured-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--accent), #c084fc);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .featured-subtitle {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .member-count {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(168, 85, 247, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .member-count-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+            animation: pulse-dot 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        .featured-links {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .featured-btn {
+            flex: 1;
+            min-width: 140px;
+            padding: 0.9rem 1.2rem;
+            background: var(--accent);
+            color: var(--bg-dark);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 2px solid var(--accent);
+        }
+
+        .featured-btn:hover {
+            background: transparent;
+            color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .featured-btn.discord {
+            background: transparent;
+            color: var(--accent);
+        }
+
+        .featured-btn.discord:hover {
+            background: var(--accent);
+            color: var(--bg-dark);
+        }
+
+        /* Regular Links */
+        .links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .section-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.8rem;
+        }
+
+        .link-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.2rem 1.5rem;
+            text-decoration: none;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.3s ease;
+            animation: slideUp 0.6s ease-out backwards;
+        }
+
+        .link-card:nth-child(2) { animation-delay: 0.1s; }
+        .link-card:nth-child(3) { animation-delay: 0.15s; }
+        .link-card:nth-child(4) { animation-delay: 0.2s; }
+        .link-card:nth-child(5) { animation-delay: 0.25s; }
+        .link-card:nth-child(6) { animation-delay: 0.3s; }
+        .link-card:nth-child(7) { animation-delay: 0.35s; }
+        .link-card:nth-child(8) { animation-delay: 0.4s; }
+        .link-card:nth-child(9) { animation-delay: 0.45s; }
+
+        .link-card:hover {
+            border-color: var(--accent);
+            transform: translateX(4px);
+            background: #1a1a1a;
+        }
+
+        .link-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .link-icon {
+            width: 24px;
+            height: 24px;
+            opacity: 0.6;
+        }
+
+        .link-text {
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .link-arrow {
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .link-card:hover .link-arrow {
+            transform: translateX(4px);
+            color: var(--accent);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            animation: fadeIn 0.6s ease-out 0.8s backwards;
+        }
+
+        /* Music Player */
+        .music-toggle {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            background: var(--accent);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(168, 85, 247, 0.4);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .music-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 30px rgba(168, 85, 247, 0.6);
+        }
+
+        .music-toggle svg {
+            width: 28px;
+            height: 28px;
+            fill: var(--bg-dark);
+        }
+
+        .music-toggle.playing {
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 4px 20px rgba(168, 85, 247, 0.4);
+            }
+            50% {
+                box-shadow: 0 4px 30px rgba(168, 85, 247, 0.8);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .featured-title {
+                font-size: 2rem;
+            }
+            
+            .featured-links {
+                flex-direction: column;
+            }
+            
+            .featured-btn {
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="name">damncatto</h1>
+            <p class="bio">Developer & Creator</p>
+        </div>
+
+        <!-- About Me Section -->
+        <div class="about-card">
+            <h3 class="about-title">About Me</h3>
+            <p class="about-text">
+                Passionate developer and founder of Kyro. Creating innovative scripts and tools for the Roblox community. 
+                Always working on new projects and pushing the boundaries of what's possible.
+            </p>
+        </div>
+
+        <!-- Kyro Featured Widget -->
+        <div class="featured-widget">
+            <div class="featured-content">
+                <span class="featured-badge">Featured Project</span>
+                <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.5rem;">
+                    <h2 class="featured-title" style="margin-bottom: 0;">Kyro</h2>
+                    <div class="member-count" style="margin-bottom: 0;">
+                        <div class="member-count-dot"></div>
+                        <span>100+ Members</span>
+                    </div>
+                </div>
+                <p class="featured-subtitle">Founder & Lead Developer</p>
+                <div class="featured-links">
+                    <a href="https://kyro.v0x.eu/" class="featured-btn" target="_blank">Visit Kyro</a>
+                    <a href="https://discord.gg/g4CeTGwYxD" class="featured-btn discord" target="_blank">Discord</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Servers -->
+        <h3 class="section-title">Servers</h3>
+        <div class="links">
+            <a href="https://discord.gg/7WgXf2HCsK" class="link-card" target="_blank">
+                <div class="link-info">
+                    <span class="link-text">CompHub - Trailmod</span>
+                </div>
+                <span class="link-arrow">→</span>
+            </a>
+        </div>
+
+        <!-- Scripts -->
+        <h3 class="section-title">Scripts</h3>
+        <div class="links">
+            <a href="https://scriptblox.com/u/CattoHub" class="link-card" target="_blank">
+                <div class="link-info">
+                    <span class="link-text">Script Blox</span>
+                </div>
+                <span class="link-arrow">→</span>
+            </a>
+        </div>
+
+        <!-- Social Links -->
+        <h3 class="section-title">Social</h3>
+        <div class="links">
+            <a href="https://www.tiktok.com/@damncatto" class="link-card" target="_blank">
+                <div class="link-info">
+                    <span class="link-text">TikTok</span>
+                </div>
+                <span class="link-arrow">→</span>
+            </a>
+
+            <a href="https://guns.lol/itzcatto" class="link-card" target="_blank">
+                <div class="link-info">
+                    <span class="link-text">guns.lol</span>
+                </div>
+                <span class="link-arrow">→</span>
+            </a>
+
+            <a href="https://www.twitch.tv/damncatto" class="link-card" target="_blank">
+                <div class="link-info">
+                    <span class="link-text">Twitch</span>
+                </div>
+                <span class="link-arrow">→</span>
+            </a>
+
+            <a href="https://www.roblox.com/users/search?keyword=cattosbored" class="link-card" target="_blank">
+                <div class="link-info">
+                    <span class="link-text">Roblox - @cattosbored</span>
+                </div>
+                <span class="link-arrow">→</span>
+            </a>
+        </div>
+
+        <!-- Contact -->
+        <h3 class="section-title">Contact</h3>
+        <div class="links">
+            <div class="link-card" style="cursor: default; opacity: 0.8;">
+                <div class="link-info">
+                    <span class="link-text">Discord - @damncatto</span>
+                </div>
+            </div>
+
+            <a href="https://www.snapchat.com/add/Wyattt.okc" class="link-card" target="_blank">
+                <div class="link-info">
+                    <span class="link-text">Snapchat</span>
+                </div>
+                <span class="link-arrow">→</span>
+            </a>
+        </div>
+
+        <div class="footer">
+            © 2026 damncatto
+        </div>
+    </div>
+
+    <!-- Music Player -->
+    <button class="music-toggle" id="musicToggle" aria-label="Toggle Music">
+        <svg id="playIcon" viewBox="0 0 24 24">
+            <path d="M8 5v14l11-7z"/>
+        </svg>
+        <svg id="pauseIcon" viewBox="0 0 24 24" style="display: none;">
+            <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/>
+        </svg>
+    </button>
+    <audio id="bgMusic" loop>
+        <source src="https://github.com/kyro-scripts/bio/raw/main/fakemink%20-%20Hotel%20(Prod%20Rok%20%26%20CXO).mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        // Music Player
+        const musicToggle = document.getElementById('musicToggle');
+        const bgMusic = document.getElementById('bgMusic');
+        const playIcon = document.getElementById('playIcon');
+        const pauseIcon = document.getElementById('pauseIcon');
+        let isPlaying = true;
+
+        // Auto-start music
+        bgMusic.volume = 0.3; // Set volume to 30%
+        bgMusic.play().catch(() => {
+            // Browsers often block autoplay, so if it fails, show play button
+            isPlaying = false;
+            playIcon.style.display = 'block';
+            pauseIcon.style.display = 'none';
+            musicToggle.classList.remove('playing');
+        });
+        
+        // Start with pause icon showing and playing animation
+        playIcon.style.display = 'none';
+        pauseIcon.style.display = 'block';
+        musicToggle.classList.add('playing');
+
+        musicToggle.addEventListener('click', () => {
+            if (isPlaying) {
+                bgMusic.pause();
+                playIcon.style.display = 'block';
+                pauseIcon.style.display = 'none';
+                musicToggle.classList.remove('playing');
+            } else {
+                bgMusic.play();
+                playIcon.style.display = 'none';
+                pauseIcon.style.display = 'block';
+                musicToggle.classList.add('playing');
+            }
+            isPlaying = !isPlaying;
+        });
+    </script>
+</body>
+</html>
