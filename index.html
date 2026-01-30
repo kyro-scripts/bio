@@ -38,6 +38,7 @@
             align-items: center;
             z-index: 10000;
             transition: opacity 0.8s ease, transform 0.8s ease;
+            cursor: pointer;
         }
 
         .splash-screen.fade-out {
@@ -60,7 +61,7 @@
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 2rem;
+            margin-bottom: 1rem;
             animation: gradientShift 3s ease infinite;
             letter-spacing: 2px;
         }
@@ -72,48 +73,11 @@
             animation: fadeIn 1s ease-out 0.5s backwards;
         }
 
-        .enter-button {
-            background: transparent;
-            border: 2px solid var(--accent);
-            color: var(--accent);
-            padding: 1rem 3rem;
-            font-size: 1.1rem;
-            font-weight: 600;
-            font-family: 'Syne', sans-serif;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            animation: pulse-border 2s ease-in-out infinite;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .enter-button::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: var(--accent);
-            transform: translate(-50%, -50%);
-            transition: width 0.6s ease, height 0.6s ease;
-            z-index: -1;
-        }
-
-        .enter-button:hover {
-            color: var(--bg-dark);
-            border-color: var(--accent);
-            box-shadow: 0 0 30px rgba(168, 85, 247, 0.5);
-            transform: scale(1.05);
-        }
-
-        .enter-button:hover::before {
-            width: 300px;
-            height: 300px;
+        .click-hint {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            animation: pulse-text 2s ease-in-out infinite;
+            letter-spacing: 1px;
         }
 
         .splash-particles {
@@ -181,12 +145,12 @@
             }
         }
 
-        @keyframes pulse-border {
+        @keyframes pulse-text {
             0%, 100% {
-                box-shadow: 0 0 20px rgba(168, 85, 247, 0.3);
+                opacity: 0.5;
             }
             50% {
-                box-shadow: 0 0 40px rgba(168, 85, 247, 0.6);
+                opacity: 1;
             }
         }
 
@@ -671,7 +635,7 @@
         <div class="splash-content">
             <h1 class="splash-logo">damncatto</h1>
             <p class="splash-subtitle">Developer & Creator</p>
-            <button class="enter-button" id="enterButton">Click to Enter</button>
+            <p class="click-hint">click 2 viewr</p>
         </div>
     </div>
 
@@ -759,7 +723,7 @@
 
             <a href="https://www.roblox.com/users/search?keyword=cattosbored" class="link-card" target="_blank">
                 <div class="link-info">
-                    <span class="link-text">Roblox - @cattosbored</span>
+                    <span class="link-text">Roblox<span>
                 </div>
                 <span class="link-arrow">→</span>
             </a>
@@ -806,10 +770,9 @@
         // Splash Screen Enter
         const splashScreen = document.getElementById('splashScreen');
         const mainContent = document.getElementById('mainContent');
-        const enterButton = document.getElementById('enterButton');
         const bgMusic = document.getElementById('bgMusic');
 
-        enterButton.addEventListener('click', () => {
+        splashScreen.addEventListener('click', () => {
             // Fade out splash screen
             splashScreen.classList.add('fade-out');
             
