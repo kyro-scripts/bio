@@ -80,51 +80,6 @@
             letter-spacing: 1px;
         }
 
-        .splash-particles {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            pointer-events: none;
-        }
-
-        .particle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: var(--accent);
-            border-radius: 50%;
-            opacity: 0;
-            animation: particleFloat 3s ease-in-out infinite;
-        }
-
-        .particle:nth-child(1) { left: 10%; animation-delay: 0s; }
-        .particle:nth-child(2) { left: 20%; animation-delay: 0.5s; }
-        .particle:nth-child(3) { left: 30%; animation-delay: 1s; }
-        .particle:nth-child(4) { left: 40%; animation-delay: 1.5s; }
-        .particle:nth-child(5) { left: 50%; animation-delay: 0.3s; }
-        .particle:nth-child(6) { left: 60%; animation-delay: 0.8s; }
-        .particle:nth-child(7) { left: 70%; animation-delay: 1.2s; }
-        .particle:nth-child(8) { left: 80%; animation-delay: 0.6s; }
-        .particle:nth-child(9) { left: 90%; animation-delay: 1.8s; }
-
-        @keyframes particleFloat {
-            0% {
-                transform: translateY(100vh) scale(0);
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-100px) scale(1);
-                opacity: 0;
-            }
-        }
-
         @keyframes floatIn {
             from {
                 opacity: 0;
@@ -621,21 +576,10 @@
 <body>
     <!-- Splash Screen -->
     <div class="splash-screen" id="splashScreen">
-        <div class="splash-particles">
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-        </div>
         <div class="splash-content">
             <h1 class="splash-logo">damncatto</h1>
-            <p class="splash-subtitle">Developer & Creator</p>
-            <p class="click-hint">click 2 viewr</p>
+            <p class="splash-subtitle">click 2 view</p>
+            <p class="click-hint">click anywhere to enter</p>
         </div>
     </div>
 
@@ -723,7 +667,7 @@
 
             <a href="https://www.roblox.com/users/search?keyword=cattosbored" class="link-card" target="_blank">
                 <div class="link-info">
-                    <span class="link-text">Roblox<span>
+                    <span class="link-text">Roblox - @cattosbored</span>
                 </div>
                 <span class="link-arrow">→</span>
             </a>
