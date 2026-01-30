@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catto Is a Bitch</title>
+    <title>damncatto - Links</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
@@ -477,6 +477,36 @@
             animation: fadeIn 0.6s ease-out 0.8s backwards;
         }
 
+        /* View Counter */
+        .view-counter {
+            position: fixed;
+            bottom: 2rem;
+            left: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 0.75rem 1.25rem;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            z-index: 999;
+            animation: fadeIn 0.6s ease-out 1s backwards;
+        }
+
+        .view-counter-icon {
+            width: 16px;
+            height: 16px;
+            color: var(--accent);
+        }
+
+        .view-count {
+            font-weight: 600;
+            color: var(--accent);
+            font-family: 'Syne', sans-serif;
+        }
+
         /* Music Player */
         .music-toggle {
             position: fixed;
@@ -579,7 +609,7 @@
         <div class="splash-content">
             <h1 class="splash-logo">damncatto</h1>
             <p class="splash-subtitle">click 2 view</p>
-            <p class="click-hint"> </p>
+            <p class="click-hint">click anywhere to enter</p>
         </div>
     </div>
 
@@ -595,8 +625,8 @@
         <div class="about-card">
             <h3 class="about-title">About Me</h3>
             <p class="about-text">
-                Full Stack Developer and founder of Kyro. I enjoy creating scripts for the Roblox Scripting Community. 
-                And I'm always working on new projects and pushing myself to a higher level.
+                Passionate developer and founder of Kyro. Creating innovative scripts and tools for the Roblox community. 
+                Always working on new projects and pushing the boundaries of what's possible.
             </p>
         </div>
 
@@ -624,7 +654,7 @@
         <div class="links">
             <a href="https://discord.gg/7WgXf2HCsK" class="link-card" target="_blank">
                 <div class="link-info">
-                    <span class="link-text">CompHub - Trial Support</span>
+                    <span class="link-text">CompHub - Trailmod</span>
                 </div>
                 <span class="link-arrow">→</span>
             </a>
@@ -697,6 +727,16 @@
     </div>
     <!-- End Main Content -->
 
+    <!-- View Counter -->
+    <div class="view-counter">
+        <svg class="view-counter-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+            <circle cx="12" cy="12" r="3"></circle>
+        </svg>
+        <span class="view-count" id="viewCount">000</span>
+        <span>views</span>
+    </div>
+
     <!-- Music Player -->
     <button class="music-toggle" id="musicToggle" aria-label="Toggle Music">
         <svg id="playIcon" viewBox="0 0 24 24">
@@ -711,6 +751,21 @@
     </audio>
 
     <script>
+        // View Counter
+        const viewCountElement = document.getElementById('viewCount');
+        
+        // Get current view count from localStorage
+        let viewCount = parseInt(localStorage.getItem('pageViews') || '0');
+        
+        // Increment view count
+        viewCount++;
+        
+        // Save to localStorage
+        localStorage.setItem('pageViews', viewCount);
+        
+        // Display with leading zeros
+        viewCountElement.textContent = viewCount.toString().padStart(3, '0');
+
         // Splash Screen Enter
         const splashScreen = document.getElementById('splashScreen');
         const mainContent = document.getElementById('mainContent');
