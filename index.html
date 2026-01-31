@@ -4,6 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>damncatto - Links</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpeg" href="https://raw.githubusercontent.com/kyro-scripts/bio/main/2937c27d4eb95d8bd71f63d664a36ab6.jpg">
+    
+    <!-- Primary Meta Tags -->
+    <meta name="title" content="Cattos Bio">
+    <meta name="description" content="Mooo">
+    
+    <!-- Open Graph / Facebook / Discord -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Cattos Bio">
+    <meta property="og:description" content="Mooo">
+    <meta property="og:image" content="https://raw.githubusercontent.com/kyro-scripts/bio/main/Catto.mooo.com.png">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="Cattos Bio">
+    <meta property="twitter:description" content="Mooo">
+    <meta property="twitter:image" content="https://raw.githubusercontent.com/kyro-scripts/bio/main/Catto.mooo.com.png">
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#a855f7">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
@@ -1178,14 +1201,16 @@
                         spotifyWidget.style.display = 'none';
                     }
                     
-                    // Update Discord Activity (Games/Apps) - Show CustomRP
+                    // Update Discord Activity (Games/Apps/CustomRPC) - Show ALL non-Spotify activities
                     if (lanyard.activities && lanyard.activities.length > 0) {
-                        // Get first non-Spotify activity
+                        // Get first non-Spotify activity (includes games like Rainbow Six Siege and CustomRPC)
                         const activity = lanyard.activities.find(a => a.type !== 2); // Type 2 is Spotify
                         
                         if (activity) {
+                            // Show activity name
                             activityName.textContent = activity.name || 'Unknown Activity';
                             
+                            // Show details (e.g., "in MENU" for games, or custom details)
                             if (activity.details) {
                                 activityDetails.textContent = activity.details;
                                 activityDetails.style.display = 'block';
@@ -1193,6 +1218,7 @@
                                 activityDetails.style.display = 'none';
                             }
                             
+                            // Show state (e.g., "By Catto (Learn More)" or game mode)
                             if (activity.state) {
                                 activityState.textContent = activity.state;
                                 activityState.style.display = 'block';
@@ -1200,21 +1226,26 @@
                                 activityState.style.display = 'none';
                             }
                             
-                            // Set activity image
+                            // Set activity image (works for both games and CustomRPC)
                             if (activity.assets && activity.assets.large_image) {
                                 const imageId = activity.assets.large_image;
                                 activityImage.style.display = 'block';
                                 
                                 if (imageId.startsWith('mp:')) {
-                                    // Media proxy image
+                                    // Media proxy image (external URLs)
                                     activityImage.src = `https://media.discordapp.net/${imageId.replace('mp:', '')}`;
                                 } else if (imageId.startsWith('http://') || imageId.startsWith('https://')) {
-                                    // Direct URL
+                                    // Direct URL (CustomRPC)
                                     activityImage.src = imageId;
                                 } else {
-                                    // Application asset
+                                    // Application asset (games like Rainbow Six Siege)
                                     activityImage.src = `https://cdn.discordapp.com/app-assets/${activity.application_id}/${imageId}.png`;
                                 }
+                                
+                                // Fallback for image load errors
+                                activityImage.onerror = function() {
+                                    this.style.display = 'none';
+                                };
                             } else {
                                 activityImage.style.display = 'none';
                             }
