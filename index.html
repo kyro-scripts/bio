@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fuck Catto</title>
+    <title>damncatto - Links</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
@@ -133,14 +133,38 @@
         }
 
         .container {
-            max-width: 500px;
+            max-width: 1200px;
             width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .left-column {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .right-column {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 968px) {
+            .container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
         }
 
         .header {
-            text-align: center;
-            margin-bottom: 2rem;
+            text-align: left;
+            margin-bottom: 0;
             animation: fadeIn 0.6s ease-out;
+            grid-column: 1 / -1;
         }
 
         .profile-card {
@@ -239,6 +263,96 @@
             line-height: 1.6;
         }
 
+        /* Spotify Widget */
+        .spotify-widget {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 0;
+            animation: slideUp 0.6s ease-out 0.25s backwards;
+        }
+
+        .spotify-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .spotify-icon {
+            width: 24px;
+            height: 24px;
+            color: #1DB954;
+        }
+
+        .spotify-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .spotify-content {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .spotify-album-art {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            background: var(--border);
+            flex-shrink: 0;
+        }
+
+        .spotify-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .spotify-track {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            margin-bottom: 0.25rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .spotify-artist {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .spotify-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+        }
+
+        .spotify-pulse {
+            width: 8px;
+            height: 8px;
+            background: #1DB954;
+            border-radius: 50%;
+            animation: pulse-dot 2s ease-in-out infinite;
+        }
+
+        .spotify-offline {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            font-style: italic;
+        }
+
         .avatar {
             width: 90px;
             height: 90px;
@@ -273,7 +387,7 @@
             border: 2px solid var(--accent);
             border-radius: 16px;
             padding: 2rem;
-            margin-bottom: 2rem;
+            margin-bottom: 0;
             position: relative;
             overflow: hidden;
             animation: slideUp 0.6s ease-out 0.2s backwards;
@@ -403,7 +517,7 @@
             font-size: 1.1rem;
             font-weight: 600;
             color: var(--text-secondary);
-            margin-top: 2rem;
+            margin-top: 0;
             margin-bottom: 1rem;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -475,36 +589,82 @@
             color: var(--text-secondary);
             font-size: 0.85rem;
             animation: fadeIn 0.6s ease-out 0.8s backwards;
+            grid-column: 1 / -1;
         }
 
-        /* View Counter */
-        .view-counter {
-            position: fixed;
-            bottom: 2rem;
-            left: 2rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            padding: 0.75rem 1.25rem;
-            border-radius: 30px;
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            z-index: 999;
-            animation: fadeIn 0.6s ease-out 1s backwards;
+        /* Mobile Support */
+        @media (max-width: 768px) {
+            .splash-logo {
+                font-size: 3rem;
+            }
+
+            .splash-subtitle {
+                font-size: 1rem;
+            }
+
+            .click-hint {
+                font-size: 0.85rem;
+            }
+
+            .header {
+                margin-bottom: 1.5rem;
+            }
+
+            .name {
+                font-size: 1.75rem;
+            }
+
+            .about-card,
+            .featured-widget {
+                padding: 1.25rem;
+            }
+
+            .featured-title {
+                font-size: 2rem;
+            }
+
+            .featured-links {
+                flex-direction: column;
+            }
+
+            .featured-btn {
+                width: 100%;
+            }
+
+            .member-count {
+                font-size: 0.75rem;
+                padding: 0.4rem 0.8rem;
+            }
+
+            .music-toggle {
+                width: 50px;
+                height: 50px;
+                bottom: 1.5rem;
+                right: 1.5rem;
+            }
+
+            .music-toggle svg {
+                width: 24px;
+                height: 24px;
+            }
+
+            .container {
+                padding: 0 0.5rem;
+            }
         }
 
-        .view-counter-icon {
-            width: 16px;
-            height: 16px;
-            color: var(--accent);
-        }
+        @media (max-width: 480px) {
+            .splash-logo {
+                font-size: 2.5rem;
+            }
 
-        .view-count {
-            font-weight: 600;
-            color: var(--accent);
-            font-family: 'Syne', sans-serif;
+            .featured-title {
+                font-size: 1.75rem;
+            }
+
+            body {
+                padding: 1rem 0.5rem;
+            }
         }
 
         /* Music Player */
@@ -609,7 +769,7 @@
         <div class="splash-content">
             <h1 class="splash-logo">damncatto</h1>
             <p class="splash-subtitle">click 2 view</p>
-            <p class="click-hint"> </p>
+            <p class="click-hint">click anywhere to enter</p>
         </div>
     </div>
 
@@ -621,103 +781,132 @@
             <p class="bio">Developer & Creator</p>
         </div>
 
-        <!-- About Me Section -->
-        <div class="about-card">
-            <h3 class="about-title">About Me</h3>
-            <p class="about-text">
-                Full Stack Developer and founder of Kyro. I enjoy creating scripts for the Roblox Scripting Community. 
-                Always working on new projects and pushing my own boundaries.
-            </p>
-        </div>
-
-        <!-- Kyro Featured Widget -->
-        <div class="featured-widget">
-            <div class="featured-content">
-                <span class="featured-badge">Featured Project</span>
-                <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.5rem;">
-                    <h2 class="featured-title" style="margin-bottom: 0;">Kyro</h2>
-                    <div class="member-count" style="margin-bottom: 0;">
-                        <div class="member-count-dot"></div>
-                        <span>100+ Members</span>
+        <!-- LEFT COLUMN: Featured Content -->
+        <div class="left-column">
+            <!-- Kyro Featured Widget -->
+            <div class="featured-widget">
+                <div class="featured-content">
+                    <span class="featured-badge">Featured Project</span>
+                    <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.5rem;">
+                        <h2 class="featured-title" style="margin-bottom: 0;">Kyro</h2>
+                        <div class="member-count" style="margin-bottom: 0;">
+                            <div class="member-count-dot"></div>
+                            <span>100+ Members</span>
+                        </div>
+                    </div>
+                    <p class="featured-subtitle">Founder & Lead Developer</p>
+                    <div class="featured-links">
+                        <a href="https://kyro.v0x.eu/" class="featured-btn" target="_blank">Visit Kyro</a>
+                        <a href="https://discord.gg/g4CeTGwYxD" class="featured-btn discord" target="_blank">Discord</a>
                     </div>
                 </div>
-                <p class="featured-subtitle">Founder & Lead Developer</p>
-                <div class="featured-links">
-                    <a href="https://kyro.v0x.eu/" class="featured-btn" target="_blank">Visit Kyro</a>
-                    <a href="https://discord.gg/g4CeTGwYxD" class="featured-btn discord" target="_blank">Discord</a>
+            </div>
+
+            <!-- Spotify Now Playing -->
+            <div class="spotify-widget" id="spotifyWidget" style="display: none;">
+                <div class="spotify-header">
+                    <svg class="spotify-icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
+                    </svg>
+                    <span class="spotify-title">Now Playing</span>
                 </div>
+                <div class="spotify-content" id="spotifyContent">
+                    <img src="" alt="Album" class="spotify-album-art" id="albumArt">
+                    <div class="spotify-info">
+                        <div class="spotify-track" id="trackName">Loading...</div>
+                        <div class="spotify-artist" id="artistName">Artist</div>
+                        <div class="spotify-status">
+                            <div class="spotify-pulse"></div>
+                            <span>Listening now</span>
+                        </div>
+                    </div>
+                </div>
+                <a href="#" id="listenAlong" target="_blank" style="display: inline-block; margin-top: 1rem; padding: 0.6rem 1.2rem; background: #1DB954; color: white; text-decoration: none; border-radius: 20px; font-size: 0.85rem; font-weight: 600; transition: all 0.3s ease;">
+                    Listen Along on Spotify
+                </a>
             </div>
         </div>
 
-        <!-- Servers -->
-        <h3 class="section-title">Servers</h3>
-        <div class="links">
-            <a href="https://discord.gg/7WgXf2HCsK" class="link-card" target="_blank">
-                <div class="link-info">
-                    <span class="link-text">CompHub - Trailmod</span>
-                </div>
-                <span class="link-arrow">→</span>
-            </a>
-        </div>
-
-        <!-- Scripts -->
-        <h3 class="section-title">Scripts</h3>
-        <div class="links">
-            <a href="https://scriptblox.com/u/CattoHub" class="link-card" target="_blank">
-                <div class="link-info">
-                    <span class="link-text">ScriptBlox</span>
-                </div>
-                <span class="link-arrow">→</span>
-            </a>
-        </div>
-
-        <!-- Social Links -->
-        <h3 class="section-title">Social</h3>
-        <div class="links">
-            <a href="https://www.tiktok.com/@damncatto" class="link-card" target="_blank">
-                <div class="link-info">
-                    <span class="link-text">TikTok</span>
-                </div>
-                <span class="link-arrow">→</span>
-            </a>
-
-            <a href="https://guns.lol/itzcatto" class="link-card" target="_blank">
-                <div class="link-info">
-                    <span class="link-text">guns.lol</span>
-                </div>
-                <span class="link-arrow">→</span>
-            </a>
-
-            <a href="https://www.twitch.tv/damncatto" class="link-card" target="_blank">
-                <div class="link-info">
-                    <span class="link-text">Twitch</span>
-                </div>
-                <span class="link-arrow">→</span>
-            </a>
-
-            <a href="https://www.roblox.com/users/search?keyword=cattosbored" class="link-card" target="_blank">
-                <div class="link-info">
-                    <span class="link-text">Roblox - @cattosbored</span>
-                </div>
-                <span class="link-arrow">→</span>
-            </a>
-        </div>
-
-        <!-- Contact -->
-        <h3 class="section-title">Contact</h3>
-        <div class="links">
-            <div class="link-card" style="cursor: default; opacity: 0.8;">
-                <div class="link-info">
-                    <span class="link-text">Discord - @damncatto</span>
+        <!-- RIGHT COLUMN: Links -->
+        <div class="right-column">
+            <!-- Servers -->
+            <div>
+                <h3 class="section-title">Servers</h3>
+                <div class="links">
+                    <a href="https://discord.gg/7WgXf2HCsK" class="link-card" target="_blank">
+                        <div class="link-info">
+                            <span class="link-text">CompHub - Trailmod</span>
+                        </div>
+                        <span class="link-arrow">→</span>
+                    </a>
                 </div>
             </div>
 
-            <a href="https://www.snapchat.com/add/Wyattt.okc" class="link-card" target="_blank">
-                <div class="link-info">
-                    <span class="link-text">Snapchat</span>
+            <!-- Scripts -->
+            <div>
+                <h3 class="section-title">Scripts</h3>
+                <div class="links">
+                    <a href="https://scriptblox.com/u/CattoHub" class="link-card" target="_blank">
+                        <div class="link-info">
+                            <span class="link-text">Script Blox</span>
+                        </div>
+                        <span class="link-arrow">→</span>
+                    </a>
                 </div>
-                <span class="link-arrow">→</span>
-            </a>
+            </div>
+
+            <!-- Social Links -->
+            <div>
+                <h3 class="section-title">Social</h3>
+                <div class="links">
+                    <a href="https://www.tiktok.com/@damncatto" class="link-card" target="_blank">
+                        <div class="link-info">
+                            <span class="link-text">TikTok</span>
+                        </div>
+                        <span class="link-arrow">→</span>
+                    </a>
+
+                    <a href="https://guns.lol/itzcatto" class="link-card" target="_blank">
+                        <div class="link-info">
+                            <span class="link-text">guns.lol</span>
+                        </div>
+                        <span class="link-arrow">→</span>
+                    </a>
+
+                    <a href="https://www.twitch.tv/damncatto" class="link-card" target="_blank">
+                        <div class="link-info">
+                            <span class="link-text">Twitch</span>
+                        </div>
+                        <span class="link-arrow">→</span>
+                    </a>
+
+                    <a href="https://www.roblox.com/users/search?keyword=cattosbored" class="link-card" target="_blank">
+                        <div class="link-info">
+                            <span class="link-text">Roblox - @cattosbored</span>
+                        </div>
+                        <span class="link-arrow">→</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Contact -->
+            <div>
+                <h3 class="section-title">Contact</h3>
+                <div class="links">
+                    <div class="link-card" style="cursor: default; opacity: 0.8;">
+                        <div class="link-info">
+                            <span class="link-text">Discord - @damncatto</span>
+                        </div>
+                    </div>
+
+                    <a href="https://www.snapchat.com/add/Wyattt.okc" class="link-card" target="_blank">
+                        <div class="link-info">
+                            <span class="link-text">Snapchat</span>
+                        </div>
+                        <span class="link-arrow">→</span>
+                    </a>
+                </div>
+            </div>
         </div>
 
         <div class="footer">
@@ -726,16 +915,6 @@
     </div>
     </div>
     <!-- End Main Content -->
-
-    <!-- View Counter -->
-    <div class="view-counter">
-        <svg class="view-counter-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-            <circle cx="12" cy="12" r="3"></circle>
-        </svg>
-        <span class="view-count" id="viewCount">000</span>
-        <span>views</span>
-    </div>
 
     <!-- Music Player -->
     <button class="music-toggle" id="musicToggle" aria-label="Toggle Music">
@@ -751,20 +930,51 @@
     </audio>
 
     <script>
-        // View Counter
-        const viewCountElement = document.getElementById('viewCount');
+        // Lanyard Integration for Spotify (via Discord)
+        const DISCORD_ID = '1361410378684436683';
         
-        // Get current view count from localStorage
-        let viewCount = parseInt(localStorage.getItem('pageViews') || '0');
-        
-        // Increment view count
-        viewCount++;
-        
-        // Save to localStorage
-        localStorage.setItem('pageViews', viewCount);
-        
-        // Display with leading zeros
-        viewCountElement.textContent = viewCount.toString().padStart(3, '0');
+        async function updateSpotify() {
+            const spotifyWidget = document.getElementById('spotifyWidget');
+            const albumArt = document.getElementById('albumArt');
+            const trackName = document.getElementById('trackName');
+            const artistName = document.getElementById('artistName');
+            const listenAlong = document.getElementById('listenAlong');
+            
+            try {
+                const response = await fetch(`https://api.lanyard.rest/v1/users/${DISCORD_ID}`);
+                const data = await response.json();
+                
+                if (data.success && data.data.spotify) {
+                    const spotify = data.data.spotify;
+                    
+                    // Show the widget
+                    spotifyWidget.style.display = 'block';
+                    
+                    // Update album art
+                    albumArt.src = spotify.album_art_url;
+                    albumArt.alt = spotify.album;
+                    
+                    // Update track info
+                    trackName.textContent = spotify.song;
+                    artistName.textContent = spotify.artist;
+                    
+                    // Update listen along link
+                    listenAlong.href = `https://open.spotify.com/track/${spotify.track_id}`;
+                    listenAlong.style.display = 'inline-block';
+                    
+                } else {
+                    // Not currently listening to Spotify
+                    spotifyWidget.style.display = 'none';
+                }
+            } catch (error) {
+                console.log('Could not fetch Spotify status:', error);
+                spotifyWidget.style.display = 'none';
+            }
+        }
+
+        // Update Spotify status every 15 seconds
+        updateSpotify();
+        setInterval(updateSpotify, 15000);
 
         // Splash Screen Enter
         const splashScreen = document.getElementById('splashScreen');
